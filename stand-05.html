@@ -419,6 +419,7 @@
     <div class="lede" data-i18n="chrome.stayintouch">Stay in touch —</div>
     <div class="btn-row">
       <a href="https://t.me/kiut_official" class="btn primary" data-i18n="chrome.follow">Follow on Telegram</a>
+      <a href="https://www.instagram.com/husanpulatov" target="_blank" rel="noopener" class="btn" data-i18n="chrome.instagram">Designer on Instagram</a>
     </div>
   </section>
 
@@ -430,5 +431,74 @@
   </div>
 
 </main>
+
+<script>
+(function () {
+  const translations = {
+    en: {
+      "chrome.back": "← Catalog",
+      "chrome.kicker": "Art Engineering · Season 2",
+      "chrome.meta.year": "Year",
+      "chrome.meta.medium": "Medium",
+      "chrome.meta.size": "Size",
+      "chrome.also": "Also in this exhibition",
+      "chrome.stayintouch": "Stay in touch —",
+      "chrome.follow": "Follow on Telegram",
+      "chrome.instagram": "Designer on Instagram",
+      "chrome.address": "Shota Rustaveli St., 156, 100121 Tashkent",
+      "chrome.season": "Spring 2026"
+    },
+    uz: {
+      "chrome.back": "← Katalog",
+      "chrome.kicker": "Art Engineering · 2-mavsum",
+      "chrome.meta.year": "Yil",
+      "chrome.meta.medium": "Texnika",
+      "chrome.meta.size": "Oʻlcham",
+      "chrome.also": "Koʻrgazmadagi boshqa asarlar",
+      "chrome.stayintouch": "Aloqada qoling —",
+      "chrome.follow": "Telegramda obuna boʻlish",
+      "chrome.instagram": "Dizayner Instagramda",
+      "chrome.address": "Shota Rustaveli koʻchasi, 156, 100121 Toshkent",
+      "chrome.season": "Bahor 2026"
+    },
+    ru: {
+      "chrome.back": "← Каталог",
+      "chrome.kicker": "Art Engineering · Сезон 2",
+      "chrome.meta.year": "Год",
+      "chrome.meta.medium": "Техника",
+      "chrome.meta.size": "Размер",
+      "chrome.also": "Другие работы выставки",
+      "chrome.stayintouch": "Оставайтесь на связи —",
+      "chrome.follow": "Подписаться в Telegram",
+      "chrome.instagram": "Дизайнер в Instagram",
+      "chrome.address": "ул. Шота Руставели, 156, 100121 Ташкент",
+      "chrome.season": "Весна 2026"
+    }
+  };
+  function applyLang(lang) {
+    const dict = translations[lang] || translations.en;
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+      const key = el.getAttribute("data-i18n");
+      if (Object.prototype.hasOwnProperty.call(dict, key)) el.textContent = dict[key];
+    });
+    document.querySelectorAll(".lang-btn").forEach(function (btn) {
+      btn.classList.toggle("active", btn.dataset.lang === lang);
+    });
+    try { localStorage.setItem("kiut.lang", lang); } catch (e) {}
+  }
+  const supported = ["en", "uz", "ru"];
+  let initial = "en";
+  try {
+    const stored = localStorage.getItem("kiut.lang");
+    if (supported.indexOf(stored) !== -1) initial = stored;
+  } catch (e) {}
+  applyLang(initial);
+  document.querySelectorAll(".lang-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () { applyLang(btn.dataset.lang); });
+  });
+})();
+</script>
+
 </body>
 </html>
