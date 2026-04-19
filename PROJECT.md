@@ -49,6 +49,10 @@ Alternatives considered:
 | 08 | `08-climate-chamber.jpg` | Cylindrical glass terrarium with plants and pressure gauges |
 | 09 | `09-golden-dragonfly.jpg` | Golden dragonfly sculpture with wire-mesh wings |
 | 10 | `10-ruined-city-diorama.jpg` | Diorama of decayed post-Soviet cityscape (Russian signage) |
+| 11 | `11-pipe-tree-pond.jpg` | Industrial pipe "tree" rising out of a koi pond |
+| 12 | `12-climate-accords.jpg` | 5x5 grid of crumpled international climate treaty documents |
+| 13 | `13-renewable-tree.jpg` | White tree with solar-panel leaves and wind-turbine fruit |
+| 14 | `14-zoetrope.jpg` | Large zoetrope drum; rotating reveals tree + people animation |
 
 ## Languages
 

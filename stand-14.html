@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f2ece1">
+<title>The Living Wheel — Stand xiv · Art Engineering Season 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f2ece1;
+    --paper-deep: #e8e1d3;
+    --ink: #1a1612;
+    --ink-soft: #5c524a;
+    --ink-whisper: #8b8478;
+    --ember: #b8492a;
+    --rule: #d9cfbb;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Manrope', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.35'/></svg>");
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: 10;
+    mix-blend-mode: multiply;
+  }
+
+  .wrap {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 1.5rem 1.5rem 5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  @media (min-width: 900px) {
+    .wrap { max-width: 760px; padding: 3rem 2rem 7rem; }
+  }
+
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 2.5rem;
+  }
+
+  .topbar a {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .topbar a:hover { color: var(--ember); }
+
+  .stand-id {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--ember);
+  }
+
+  .piece-head { margin-bottom: 2rem; }
+
+  .piece-kicker {
+    font-size: 0.68rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-whisper);
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  .piece-title {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: clamp(2.8rem, 9vw, 4.8rem);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.25rem;
+  }
+
+  .piece-title em { font-style: italic; color: var(--ember); }
+
+  .piece-meta {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .piece-meta span { display: inline-flex; gap: 0.4rem; }
+  .piece-meta b {
+    color: var(--ink); font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; font-size: 0.7rem;
+  }
+
+  .piece-img {
+    width: 100%;
+    overflow: hidden;
+    margin: 2.5rem 0;
+    background: var(--paper-deep);
+    position: relative;
+  }
+
+  .piece-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: saturate(0.92) contrast(1.03);
+  }
+
+  .piece-caption {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--ink-whisper);
+    text-align: center;
+    margin-top: -1.75rem;
+    margin-bottom: 3rem;
+  }
+
+  .piece-body {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.35rem;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-bottom: 2.5rem;
+  }
+
+  .piece-body::first-letter {
+    font-size: 3.6rem;
+    float: left;
+    line-height: 0.9;
+    padding: 0.3rem 0.6rem 0 0;
+    font-style: italic;
+    color: var(--ember);
+  }
+
+  .piece-body p + p { margin-top: 1.25rem; text-indent: 1.8em; }
+  .piece-body p:first-child { text-indent: 0; }
+
+  .divider {
+    text-align: center;
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    color: var(--ink-whisper);
+    margin: 3rem 0;
+    letter-spacing: 0.5em;
+  }
+
+  .details {
+    border: 1px solid var(--rule);
+    padding: 1.75rem;
+    margin-bottom: 3rem;
+  }
+
+  .details dl {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    row-gap: 0.85rem;
+    column-gap: 1.5rem;
+    font-size: 0.88rem;
+  }
+
+  .details dt {
+    color: var(--ink-whisper);
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding-top: 0.2rem;
+  }
+
+  .details dd { color: var(--ink); }
+
+  .series-head {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .series {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+    margin-bottom: 3rem;
+  }
+
+  @media (min-width: 480px) {
+    .series { grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+  }
+
+  .series a {
+    display: block;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .series img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: saturate(0.85) contrast(1);
+    transition: filter 0.4s, transform 0.8s cubic-bezier(.2,.7,.2,1);
+  }
+
+  .series a:hover img { filter: saturate(1); transform: scale(1.05); }
+
+  .series a::after {
+    content: attr(data-num);
+    position: absolute;
+    bottom: 0.4rem; right: 0.5rem;
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--paper);
+    text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+  }
+
+  .follow {
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 2.5rem 0;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .follow .lede {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    margin-bottom: 1.25rem;
+    color: var(--ink);
+  }
+
+  .btn-row {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.4rem;
+    min-height: 44px;
+    border: 1px solid var(--ink);
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: all 0.3s;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .btn:hover { background: var(--ink); color: var(--paper); }
+  .btn.primary { background: var(--ember); border-color: var(--ember); color: var(--paper); }
+  .btn.primary:hover { background: var(--ink); border-color: var(--ink); }
+
+  .foot {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--ink-whisper);
+    margin-top: 3rem;
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+  }
+
+  .foot-logo {
+    display: block;
+    margin: 0 auto 1rem;
+    height: 50px;
+    width: auto;
+  }
+
+  .foot-logo-wrap { text-align: center; }
+
+  .foot a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    transition: color 0.3s, border-color 0.3s;
+  }
+
+  .foot a:hover {
+    color: var(--ember);
+    border-bottom-color: var(--ember);
+  }
+
+  .fade-in { opacity: 0; animation: fadeUp 0.8s cubic-bezier(.2,.7,.2,1) forwards; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .d1 { animation-delay: 0.05s; }
+  .d2 { animation-delay: 0.15s; }
+  .d3 { animation-delay: 0.28s; }
+  .d4 { animation-delay: 0.42s; }
+  .d5 { animation-delay: 0.58s; }
+
+  /* ---------- language switcher ---------- */
+  .lang-bar {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.25rem;
+    padding: 0.9rem 1.5rem 0;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  @media (min-width: 900px) {
+    .lang-bar { padding: 1rem 2rem 0; max-width: 800px; }
+  }
+  .lang-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--ink-whisper);
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    padding: 0.6rem 0.9rem;
+    min-height: 44px;
+    min-width: 44px;
+    cursor: pointer;
+    transition: all 0.25s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .lang-btn:hover { color: var(--ink); }
+  .lang-btn:focus-visible { outline: 2px solid var(--ember); outline-offset: 2px; }
+  .lang-btn.active { color: var(--ink); border-color: var(--ink); }
+</style>
+</head>
+<body>
+
+<nav class="lang-bar" aria-label="Language selector">
+  <button class="lang-btn" data-lang="en">EN</button>
+  <button class="lang-btn" data-lang="uz">UZ</button>
+  <button class="lang-btn" data-lang="ru">RU</button>
+</nav>
+
+<main class="wrap">
+
+  <div class="topbar fade-in d1">
+    <a href="index.html" data-i18n="chrome.back">← Catalog</a>
+    <span class="stand-id">Stand xiv.</span>
+  </div>
+
+  <header class="piece-head fade-in d2">
+    <div class="piece-kicker" data-i18n="chrome.kicker">Art Engineering · Season 2</div>
+    <h1 class="piece-title"><span data-i18n="piece.title.prefix">The Living</span><br><em data-i18n="piece.title.accent">Wheel</em></h1>
+    <div class="piece-meta">
+      <span><b data-i18n="chrome.meta.year">Year</b> 2026</span>
+      <span><b data-i18n="chrome.meta.medium">Medium</b> <span data-i18n="piece.medium">Painted steel drum, motorised rotation, printed animation strip, LED ring</span></span>
+    </div>
+  </header>
+
+  <figure class="fade-in d3">
+    <div class="piece-img">
+      <img loading="eager" decoding="async" src="pictures/14-zoetrope.jpg" alt="The Living Wheel — Painted steel drum, motorised rotation, printed animation strip, LED ring">
+    </div>
+    <figcaption class="piece-caption" data-i18n="piece.caption">Rotate the drum. The tree grows. People live.</figcaption>
+  </figure>
+
+  <div class="piece-body fade-in d3">
+    <p data-i18n="piece.p1">An old optical toy, scaled up to the size of a barrel. Set the drum spinning and the slits become a window. Inside the window a tree is growing. Around the tree, people are walking, eating, sitting, greeting one another. Let the drum stop, and the scene stops with it.</p>
+    <p data-i18n="piece.p2">The piece is a question about what keeps the tree growing. The answer is not a mystery, and it is not far away. It is us, and what we do with our hands, and what we decide on the days no one is watching.</p>
+  </div>
+
+  <div class="divider fade-in d4">· · ·</div>
+
+  <section class="details fade-in d4">
+    <dl>
+      <dt>Materials</dt><dd>Painted steel drum, motorised rotor, printed paper strip, LED ring</dd>
+      <dt>Scale</dt><dd>1.8 m tall, 1.4 m diameter</dd>
+      <dt>Mechanism</dt><dd>3.2 rpm rotation reveals a 16-frame animation through vertical slits</dd>
+      <dt>Subject</dt><dd>A tree growing; people gathered around it</dd>
+      <dt>Edition</dt><dd>One of one</dd>
+    </dl>
+  </section>
+
+  <h2 class="series-head fade-in d4" data-i18n="chrome.also">Also in this exhibition</h2>
+  <div class="series fade-in d4">
+    <a href="stand-01.html" data-num="i"><img loading="lazy" decoding="async" src="pictures/01-bottle-turtle.jpg" alt=""></a>
+    <a href="stand-03.html" data-num="iii"><img loading="lazy" decoding="async" src="pictures/03-wire-fish.jpg" alt=""></a>
+    <a href="stand-05.html" data-num="v"><img loading="lazy" decoding="async" src="pictures/05-smog-vitrine.jpg" alt=""></a>
+  </div>
+
+  <section class="follow fade-in d5">
+    <div class="lede" data-i18n="chrome.stayintouch">Stay in touch —</div>
+    <div class="btn-row">
+      <a href="https://t.me/kiut_official" class="btn primary" data-i18n="chrome.follow">Follow on Telegram</a>
+      <a href="https://www.instagram.com/husanpulatov" target="_blank" rel="noopener" class="btn" data-i18n="chrome.instagram">Designer on Instagram</a>
+    </div>
+  </section>
+
+  <div class="foot fade-in d5">
+    <div class="foot-logo-wrap">
+      <img class="foot-logo" src="assets/logo-header.svg" alt="Kimyo International University in Tashkent">
+    </div>
+    <div><a href="https://yandex.uz/maps/-/CPCirU0f" target="_blank" rel="noopener" data-i18n="chrome.address">Shota Rustaveli St., 156, 100121 Tashkent</a> · <span data-i18n="chrome.season">Spring 2026</span></div>
+  </div>
+
+</main>
+
+<script>
+(function () {
+  const translations = {
+    en: {
+      "chrome.back": "← Catalog",
+      "chrome.kicker": "Art Engineering · Season 2",
+      "chrome.meta.year": "Year",
+      "chrome.meta.medium": "Medium",
+      "chrome.meta.size": "Size",
+      "chrome.also": "Also in this exhibition",
+      "chrome.stayintouch": "Stay in touch —",
+      "chrome.follow": "Follow on Telegram",
+      "chrome.instagram": "Designer on Instagram",
+      "chrome.address": "Shota Rustaveli St., 156, 100121 Tashkent",
+      "chrome.season": "Spring 2026",
+      "piece.title.prefix": "The Living",
+      "piece.title.accent": "Wheel",
+      "piece.medium": "Painted steel drum, motorised rotation, printed animation strip, LED ring",
+      "piece.size": "110 × 140 cm",
+      "piece.caption": "Rotate the drum. The tree grows. People live.",
+      "piece.p1": "An old optical toy, scaled up to the size of a barrel. Set the drum spinning and the slits become a window. Inside the window a tree is growing. Around the tree, people are walking, eating, sitting, greeting one another. Let the drum stop, and the scene stops with it.",
+      "piece.p2": "The piece is a question about what keeps the tree growing. The answer is not a mystery, and it is not far away. It is us, and what we do with our hands, and what we decide on the days no one is watching."
+    
+    },
+    uz: {
+      "chrome.back": "← Katalog",
+      "chrome.kicker": "Art Engineering · 2-mavsum",
+      "chrome.meta.year": "Yil",
+      "chrome.meta.medium": "Texnika",
+      "chrome.meta.size": "Oʻlcham",
+      "chrome.also": "Koʻrgazmadagi boshqa asarlar",
+      "chrome.stayintouch": "Aloqada qoling —",
+      "chrome.follow": "Telegramda obuna boʻlish",
+      "chrome.instagram": "Dizayner Instagramda",
+      "chrome.address": "Shota Rustaveli koʻchasi, 156, 100121 Toshkent",
+      "chrome.season": "Bahor 2026",
+      "piece.title.prefix": "Tirik",
+      "piece.title.accent": "Gʻildirak",
+      "piece.medium": "Boʻyalgan poʻlat baran, motorli aylanish, chop etilgan animatsiya lentasi, LED halqa",
+      "piece.size": "110 × 140 sm",
+      "piece.caption": "Baranini aylantiring. Daraxt oʻsadi. Odamlar yashaydi.",
+      "piece.p1": "Eski optik oʻyinchoq, bochka kattaligida. Baranini aylantirib yuboring, va tirqishlar deraza boʻlib qoladi. Deraza ichida daraxt oʻsmoqda. Daraxt atrofida odamlar yurmoqda, ovqatlanmoqda, oʻtirmoqda, bir-birlarini salomlashmoqda. Baranini toʻxtating, va manzara ham toʻxtaydi.",
+      "piece.p2": "Bu asar savol: daraxtni oʻsishda nima ushlab turadi? Javob sir emas va uzoq emas. Javob — biz, bizning qoʻllarimiz va hech kim qaramayotgan kunlarda qilgan qarorlarimiz."
+    
+    },
+    ru: {
+      "chrome.back": "← Каталог",
+      "chrome.kicker": "Art Engineering · Сезон 2",
+      "chrome.meta.year": "Год",
+      "chrome.meta.medium": "Техника",
+      "chrome.meta.size": "Размер",
+      "chrome.also": "Другие работы выставки",
+      "chrome.stayintouch": "Оставайтесь на связи —",
+      "chrome.follow": "Подписаться в Telegram",
+      "chrome.instagram": "Дизайнер в Instagram",
+      "chrome.address": "ул. Шота Руставели, 156, 100121 Ташкент",
+      "chrome.season": "Весна 2026",
+      "piece.title.prefix": "Живое",
+      "piece.title.accent": "колесо",
+      "piece.medium": "Крашеный стальной барабан, моторизованное вращение, печатная анимационная лента, светодиодное кольцо",
+      "piece.size": "110 × 140 см",
+      "piece.caption": "Вращайте барабан. Дерево растёт. Люди живут.",
+      "piece.p1": "Старая оптическая игрушка, увеличенная до размера бочки. Раскрутите барабан — и щели станут окном. В окне растёт дерево. Вокруг него ходят, едят, сидят, здороваются люди. Остановите барабан — и сцена останавливается вместе с ним.",
+      "piece.p2": "Эта работа — вопрос о том, что поддерживает дерево в росте. Ответ не загадка, и он рядом. Это мы, и то, что мы делаем руками, и то, что решаем в дни, когда никто на нас не смотрит."
+    
+    }
+  };
+  function applyLang(lang) {
+    const dict = translations[lang] || translations.en;
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+      const key = el.getAttribute("data-i18n");
+      if (Object.prototype.hasOwnProperty.call(dict, key)) el.textContent = dict[key];
+    });
+    document.querySelectorAll(".lang-btn").forEach(function (btn) {
+      btn.classList.toggle("active", btn.dataset.lang === lang);
+    });
+    try { localStorage.setItem("kiut.lang", lang); } catch (e) {}
+  }
+  const supported = ["en", "uz", "ru"];
+  let initial = "en";
+  try {
+    const stored = localStorage.getItem("kiut.lang");
+    if (supported.indexOf(stored) !== -1) initial = stored;
+  } catch (e) {}
+  applyLang(initial);
+  document.querySelectorAll(".lang-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () { applyLang(btn.dataset.lang); });
+  });
+})();
+</script>
+
+</body>
+</html>
