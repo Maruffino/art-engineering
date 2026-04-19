@@ -324,23 +324,63 @@
   .d3 { animation-delay: 0.28s; }
   .d4 { animation-delay: 0.42s; }
   .d5 { animation-delay: 0.58s; }
+
+  /* ---------- language switcher ---------- */
+  .lang-bar {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.25rem;
+    padding: 0.9rem 1.5rem 0;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  @media (min-width: 900px) {
+    .lang-bar { padding: 1rem 2rem 0; max-width: 800px; }
+  }
+  .lang-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--ink-whisper);
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    padding: 0.6rem 0.9rem;
+    min-height: 44px;
+    min-width: 44px;
+    cursor: pointer;
+    transition: all 0.25s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .lang-btn:hover { color: var(--ink); }
+  .lang-btn:focus-visible { outline: 2px solid var(--ember); outline-offset: 2px; }
+  .lang-btn.active { color: var(--ink); border-color: var(--ink); }
 </style>
 </head>
 <body>
+
+<nav class="lang-bar" aria-label="Language selector">
+  <button class="lang-btn" data-lang="en">EN</button>
+  <button class="lang-btn" data-lang="uz">UZ</button>
+  <button class="lang-btn" data-lang="ru">RU</button>
+</nav>
+
 <main class="wrap">
 
   <div class="topbar fade-in d1">
-    <a href="index.html">← Catalog</a>
+    <a href="index.html" data-i18n="chrome.back">← Catalog</a>
     <span class="stand-id">Stand ix.</span>
   </div>
 
   <header class="piece-head fade-in d2">
-    <div class="piece-kicker">Art Engineering · Season 2</div>
+    <div class="piece-kicker" data-i18n="chrome.kicker">Art Engineering · Season 2</div>
     <h1 class="piece-title">Last of the<br><em>Gilded</em></h1>
     <div class="piece-meta">
-      <span><b>Year</b> 2026</span>
-      <span><b>Medium</b> Cast brass, wire mesh, gold leaf, on panel</span>
-      <span><b>Size</b> 70 × 90 cm</span>
+      <span><b data-i18n="chrome.meta.year">Year</b> 2026</span>
+      <span><b data-i18n="chrome.meta.medium">Medium</b> Cast brass, wire mesh, gold leaf, on panel</span>
+      <span><b data-i18n="chrome.meta.size">Size</b> 70 × 90 cm</span>
     </div>
   </header>
 
@@ -368,7 +408,7 @@
     </dl>
   </section>
 
-  <h2 class="series-head fade-in d4">Also in this exhibition</h2>
+  <h2 class="series-head fade-in d4" data-i18n="chrome.also">Also in this exhibition</h2>
   <div class="series fade-in d4">
     <a href="stand-10.html" data-num="x"><img loading="lazy" decoding="async" src="pictures/10-ruined-city-diorama.jpg" alt=""></a>
     <a href="stand-01.html" data-num="i"><img loading="lazy" decoding="async" src="pictures/01-bottle-turtle.jpg" alt=""></a>
@@ -376,9 +416,9 @@
   </div>
 
   <section class="follow fade-in d5">
-    <div class="lede">Stay in touch —</div>
+    <div class="lede" data-i18n="chrome.stayintouch">Stay in touch —</div>
     <div class="btn-row">
-      <a href="https://t.me/kiut_official" class="btn primary">Follow on Telegram</a>
+      <a href="https://t.me/kiut_official" class="btn primary" data-i18n="chrome.follow">Follow on Telegram</a>
     </div>
   </section>
 
@@ -386,7 +426,7 @@
     <div class="foot-logo-wrap">
       <img class="foot-logo" src="assets/logo-header.svg" alt="Kimyo International University in Tashkent">
     </div>
-    <div><a href="https://yandex.uz/maps/-/CPCirU0f" target="_blank" rel="noopener">Shota Rustaveli St., 156, 100121 Tashkent</a> · Spring 2026</div>
+    <div><a href="https://yandex.uz/maps/-/CPCirU0f" target="_blank" rel="noopener" data-i18n="chrome.address">Shota Rustaveli St., 156, 100121 Tashkent</a> · <span data-i18n="chrome.season">Spring 2026</span></div>
   </div>
 
 </main>
