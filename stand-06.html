@@ -365,6 +365,7 @@
   <button class="lang-btn" data-lang="en">EN</button>
   <button class="lang-btn" data-lang="uz">UZ</button>
   <button class="lang-btn" data-lang="ru">RU</button>
+  <button class="lang-btn" data-lang="ko">KO</button>
 </nav>
 
 <main class="wrap">
@@ -525,6 +526,19 @@
       "piece.dl.dt5": "Тираж",
       "piece.dl.dd5": "Единственный экземпляр"
     
+    },
+    ko: {
+      "chrome.back": "← 카탈로그",
+      "chrome.kicker": "Art Engineering · 시즌 2",
+      "chrome.meta.year": "연도",
+      "chrome.meta.medium": "매체",
+      "chrome.meta.size": "크기",
+      "chrome.also": "이 전시의 다른 작품들",
+      "chrome.stayintouch": "연락 유지 —",
+      "chrome.follow": "텔레그램 팔로우",
+      "chrome.instagram": "디자이너 인스타그램",
+      "chrome.address": "쇼타 루스타벨리 거리 156, 100121 타슈쾄트",
+      "chrome.season": "2026년 4월 20–24일"
     }
   };
   function applyLang(lang) {
@@ -539,7 +553,7 @@
     });
     try { localStorage.setItem("kiut.lang", lang); } catch (e) {}
   }
-  const supported = ["en", "uz", "ru"];
+  const supported = ["en", "uz", "ru", "ko"];
   let initial = "en";
   try {
     const stored = localStorage.getItem("kiut.lang");
