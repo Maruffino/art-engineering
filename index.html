@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f2ece1">
+<title>Art Engineering — Season 2 · KIUT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f2ece1;
+    --paper-deep: #e8e1d3;
+    --ink: #1a1612;
+    --ink-soft: #5c524a;
+    --ink-whisper: #8b8478;
+    --ember: #b8492a;
+    --rule: #d9cfbb;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Manrope', sans-serif;
+    font-weight: 400;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(184, 73, 42, 0.04), transparent 40%),
+      radial-gradient(circle at 85% 90%, rgba(26, 22, 18, 0.05), transparent 45%);
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.35'/></svg>");
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: multiply;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 2;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 6rem;
+  }
+
+  @media (min-width: 768px) {
+    .wrap { padding: 3.5rem 3rem 8rem; }
+  }
+
+  .masthead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 4rem;
+  }
+
+  .mark {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .mark img {
+    height: 56px;
+    width: auto;
+    display: block;
+  }
+
+  @media (max-width: 600px) {
+    .mark img { height: 44px; }
+  }
+
+  .meta {
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+
+  .hero {
+    display: grid;
+    gap: 2rem;
+    margin-bottom: 6rem;
+  }
+
+  @media (min-width: 900px) {
+    .hero {
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem;
+      align-items: end;
+    }
+  }
+
+  .hero-title {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: clamp(3.2rem, 10vw, 7.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--ember);
+  }
+
+  .hero-lede {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    max-width: 40ch;
+    padding-bottom: 0.5rem;
+  }
+
+  .hero-lede::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--ink);
+    margin-bottom: 1.25rem;
+  }
+
+  .intro-strip {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+    padding: 2rem 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 5rem;
+  }
+
+  @media (min-width: 700px) {
+    .intro-strip {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+    }
+  }
+
+  .intro-item .label {
+    font-size: 0.65rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-whisper);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .intro-item .value {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.35rem;
+    line-height: 1.3;
+  }
+
+  .intro-item .value a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    transition: color 0.3s, border-color 0.3s;
+  }
+
+  .intro-item .value a:hover {
+    color: var(--ember);
+    border-bottom-color: var(--ember);
+  }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+    gap: 1rem;
+  }
+
+  .section-head h2 {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    letter-spacing: -0.01em;
+  }
+
+  .section-head .count {
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-whisper);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .catalog {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem 2rem;
+  }
+
+  @media (min-width: 640px) { .catalog { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .catalog { grid-template-columns: repeat(3, 1fr); } }
+
+  .stand {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+  }
+
+  @media (min-width: 1024px) {
+    .stand:nth-child(3n+2) { transform: translateY(3rem); }
+    .stand:nth-child(3n+3) { transform: translateY(-1.5rem); }
+  }
+
+  .stand-frame {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    background: var(--paper-deep);
+    margin-bottom: 1.1rem;
+  }
+
+  .stand-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.9) contrast(1.02);
+    transition: transform 1.2s cubic-bezier(.2,.7,.2,1), filter 0.6s;
+  }
+
+  .stand:hover .stand-frame img {
+    transform: scale(1.04);
+    filter: saturate(1) contrast(1.05);
+  }
+
+  .stand-num {
+    position: absolute;
+    top: 0.8rem; left: 0.9rem;
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--paper);
+    text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+    z-index: 2;
+  }
+
+  .stand-info { display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; }
+
+  .stand-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.45rem;
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+  }
+
+  .stand-title em { font-style: italic; color: var(--ember); }
+
+  .stand-year {
+    font-size: 0.75rem;
+    color: var(--ink-whisper);
+    letter-spacing: 0.12em;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .footer {
+    margin-top: 8rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+  }
+
+  .footer a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 1px;
+  }
+
+  .footer a:hover { color: var(--ember); border-color: var(--ember); }
+
+  /* ---------- language switcher ---------- */
+  .lang-bar {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.25rem;
+    padding: 0.9rem 1.5rem 0;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  @media (min-width: 768px) {
+    .lang-bar { padding: 1rem 3rem 0; }
+  }
+
+  .lang-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--ink-whisper);
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    padding: 0.6rem 0.9rem;
+    min-height: 44px;
+    min-width: 44px;
+    cursor: pointer;
+    transition: all 0.25s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .lang-btn:hover { color: var(--ink); }
+  .lang-btn:focus-visible { outline: 2px solid var(--ember); outline-offset: 2px; }
+  .lang-btn.active {
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+
+  .fade-in { opacity: 0; animation: fadeUp 0.9s cubic-bezier(.2,.7,.2,1) forwards; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .d1 { animation-delay: 0.05s; }
+  .d2 { animation-delay: 0.18s; }
+  .d3 { animation-delay: 0.32s; }
+  .d4 { animation-delay: 0.48s; }
+</style>
+</head>
+<body>
+
+<nav class="lang-bar" aria-label="Language selector">
+  <button class="lang-btn" data-lang="en">EN</button>
+  <button class="lang-btn" data-lang="uz">UZ</button>
+  <button class="lang-btn" data-lang="ru">RU</button>
+</nav>
+
+<main class="wrap">
+
+  <header class="masthead fade-in d1">
+    <a class="mark" href="https://kiut.uz/en" aria-label="KIUT">
+      <img src="assets/logo-header.svg" alt="Kimyo International University in Tashkent">
+    </a>
+    <div class="meta" data-i18n="meta.season">Spring · 2026</div>
+  </header>
+
+  <section class="hero">
+    <h1 class="hero-title fade-in d2">
+      <span data-i18n="hero.brand1">Art</span><br>
+      <span data-i18n="hero.brand2">Engineering</span><br>
+      <em data-i18n="hero.season">Season 2</em>
+    </h1>
+    <p class="hero-lede fade-in d3" data-i18n="hero.lede">Ten works assembled from the remains of ordinary life — bottles, wires, cellophane, weather. The second edition of Art Engineering at KIUT, returning two years after its first staging.</p>
+  </section>
+
+  <section class="intro-strip fade-in d3">
+    <div class="intro-item">
+      <div class="label" data-i18n="intro.exhibition.label">Exhibition</div>
+      <div class="value">
+        <span data-i18n="intro.exhibition.brand">Art Engineering</span><br>
+        <em style="font-style:italic" data-i18n="intro.exhibition.season">Season 2</em><span data-i18n="intro.exhibition.since"> · since 2024</span>
+      </div>
+    </div>
+    <div class="intro-item">
+      <div class="label" data-i18n="intro.works.label">Works</div>
+      <div class="value" data-i18n="intro.works.value">Mixed media · 2024–2026</div>
+    </div>
+    <div class="intro-item">
+      <div class="label" data-i18n="intro.location.label">Location</div>
+      <div class="value"><a href="https://yandex.uz/maps/-/CPCirU0f" target="_blank" rel="noopener"><span data-i18n="intro.location.street">Shota Rustaveli St., 156,</span><br><span data-i18n="intro.location.city">100121 Tashkent</span></a></div>
+    </div>
+  </section>
+
+  <div class="section-head fade-in d4">
+    <h2 data-i18n="section.catalog">Catalog</h2>
+    <span class="count" data-i18n="section.count">11 works</span>
+  </div>
+
+  <section class="catalog">
+
+    <a class="stand fade-in d4" href="stand-01.html">
+      <div class="stand-frame">
+        <span class="stand-num">i.</span>
+        <img loading="eager" decoding="async" src="pictures/01-bottle-turtle.jpg" alt="Sea turtle sculpture made from green glass bottles">
+      </div>
+      <div class="stand-info">
+        <div class="stand-title">Glass <em>Current</em></div>
+        <div class="stand-year">2026</div>
+      </div>
+    </a>
+
+    <a class="stand fade-in d4" href="stand-01.html">
+      <div class="stand-frame">
+        <span class="stand-num">ii.</span>
+        <img loading="lazy" decoding="async" src="pictures/02-cloud-garden.jpg" alt="Hydroponic tower with a cotton cloud above">
+      </div>
+      <div class="stand-info">
+        <div class="stand-title">After the <em>Drought</em></div>
+        <div class="stand-year">2026</div>
+      </div>
+    </a>
+
+    <a class="stand fade-in d4" href="stand-01.html">
+      <div class="stand-frame">
+        <span class="stand-num">iii.</span>
+        <img loading="lazy" decoding="async" src="pictures/03-wire-fish.jpg" alt="Fish sculpture made from computer wires and circuit board">
+      </div>
+      <div class="stand-info">
+        <div class="stand-title">Silicon <em>Tide</em></div>
+        <div class="stand-year">2026</div>
+      </div>
+    </a>
+
+    <a class="stand fade-in d4" href="stand-01.html">
+      <div class="stand-frame">
+        <span class="stand-num">iv.</span>
+        <img loading="lazy" decoding="async" src="pictures/04-plastic-skyline.jpg" alt="Glass case with hanging plastic strips and city skyline behind">
+      </div>
+      <div class="stand-info">
+        <div class="stand-title">Behind the <em>Veil</em></div>
+        <div class="stand-year">2026</div>
+      </div>
+    </a>
+
+    <a class="stand fade-in d4" href="stand-01.html">
+      <div class="stand-frame">
+        <span class="stand-num">v.</span>
+        <img loading="lazy" decoding="async" src="pictures/05-smog-vitrine.jpg" alt="Illuminated vitrine with miniature city and purple smog">
+      </div>
+      <div class="stand-info">
+        <div class="stand-title">Respirator for a <em>City</em></div>
+        <div class="stand-year">2026</div>
+      </div>
+    </a>
+
+    <a class="stand fade-in d4" href="stand-01.html">
+      <div class="stand-frame">
+        <span class="stand-num">vi.</span>
+        <img loading="lazy" decoding="async" src="pictures/06-fetus-reaching-earth.jpg" alt="Cellophane relief of a fetus reaching for a wrapped globe">
+      </div>
+      <div class="stand-info">
+        <div class="stand-title"><em>Inheritance</em></div>
+        <div class="stand-year">2026</div>
+      </div>
+    </a>
+
+    <a class="stand fade-in d4" href="stand-01.html">
+      <div class="stand-frame">
+        <span class="stand-num">vii.</span>
+        <img loading="lazy" decoding="async" src="pictures/07-hall-projection.jpg" alt="Exhibition hall with black pillar sculpture and floor projection">
+      </div>
+      <div class="stand-info">
+        <div class="stand-title">The <em>River</em> That Was Here</div>
+        <div class="stand-year">2026</div>
+      </div>
+    </a>
+
+    <a class="stand fade-in d4" href="stand-01.html">
+      <div class="stand-frame">
+        <span class="stand-num">viii.</span>
+        <img loading="lazy" decoding="async" src="pictures/08-climate-chamber.jpg" alt="Cylindrical glass terrarium with plants and pressure gauges">
+      </div>
+      <div class="stand-info">
+        <div class="stand-title">A Missing <em>Climate</em></div>
+        <div class="stand-year">2026</div>
+      </div>
+    </a>
+
+    <a class="stand fade-in d4" href="stand-01.html">
+      <div class="stand-frame">
+        <span class="stand-num">ix.</span>
+        <img loading="lazy" decoding="async" src="pictures/09-golden-dragonfly.jpg" alt="Golden dragonfly sculpture with wire-mesh wings">
+      </div>
+      <div class="stand-info">
+        <div class="stand-title">Last of the <em>Gilded</em></div>
+        <div class="stand-year">2026</div>
+      </div>
+    </a>
+
+    <a class="stand fade-in d4" href="stand-01.html">
+      <div class="stand-frame">
+        <span class="stand-num">x.</span>
+        <img loading="lazy" decoding="async" src="pictures/10-ruined-city-diorama.jpg" alt="Diorama of a decayed post-Soviet city">
+      </div>
+      <div class="stand-info">
+        <div class="stand-title">The City <em>Remembers</em> Itself</div>
+        <div class="stand-year">2026</div>
+      </div>
+    </a>
+
+    <a class="stand fade-in d4" href="stand-01.html">
+      <div class="stand-frame">
+        <span class="stand-num">xi.</span>
+        <img loading="lazy" decoding="async" src="pictures/11-pipe-tree-pond.jpg" alt="Sculpture of a tree made from rusty pipes rising from a koi pond basin">
+      </div>
+      <div class="stand-info">
+        <div class="stand-title">Rust and <em>Lily</em></div>
+        <div class="stand-year">2026</div>
+      </div>
+    </a>
+
+  </section>
+
+  <footer class="footer">
+    <div data-i18n="footer.copy">© 2026 Kimyo International University in Tashkent</div>
+    <div>
+      <a href="https://t.me/kiut_official" data-i18n="footer.follow">Follow on Telegram</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+(function () {
+  const translations = {
+    en: {
+      "page.title": "Art Engineering \u2014 Season 2 \u00b7 KIUT",
+      "meta.season": "Spring \u00b7 2026",
+      "hero.brand1": "Art",
+      "hero.brand2": "Engineering",
+      "hero.season": "Season 2",
+      "hero.lede": "Ten works assembled from the remains of ordinary life \u2014 bottles, wires, cellophane, weather. The second edition of Art Engineering at KIUT, returning two years after its first staging.",
+      "intro.exhibition.label": "Exhibition",
+      "intro.exhibition.brand": "Art Engineering",
+      "intro.exhibition.season": "Season 2",
+      "intro.exhibition.since": " \u00b7 since 2024",
+      "intro.works.label": "Works",
+      "intro.works.value": "Mixed media \u00b7 2026",
+      "intro.location.label": "Location",
+      "intro.location.street": "Shota Rustaveli St., 156,",
+      "intro.location.city": "100121 Tashkent",
+      "section.catalog": "Catalog",
+      "section.count": "11 works",
+      "footer.copy": "\u00a9 2026 Kimyo International University in Tashkent",
+      "footer.follow": "Follow on Telegram"
+    },
+    uz: {
+      "page.title": "Art Engineering \u2014 2-mavsum \u00b7 KIUT",
+      "meta.season": "Bahor \u00b7 2026",
+      "hero.brand1": "Art",
+      "hero.brand2": "Engineering",
+      "hero.season": "2-mavsum",
+      "hero.lede": "Kundalik hayot qoldiqlaridan \u2014 shishalar, simlar, sellofan, ob-havodan \u2014 yig'ilgan o'n bir asar. KIUTda Art Engineering ko'rgazmasining ikkinchi nashri ikki yildan so'ng qaytib keldi.",
+      "intro.exhibition.label": "Ko'rgazma",
+      "intro.exhibition.brand": "Art Engineering",
+      "intro.exhibition.season": "2-mavsum",
+      "intro.exhibition.since": " \u00b7 2024 yildan",
+      "intro.works.label": "Asarlar",
+      "intro.works.value": "Aralash texnika \u00b7 2026",
+      "intro.location.label": "Manzil",
+      "intro.location.street": "Shota Rustaveli ko'chasi, 156,",
+      "intro.location.city": "100121 Toshkent",
+      "section.catalog": "Katalog",
+      "section.count": "11 ta asar",
+      "footer.copy": "\u00a9 2026 Kimyo International University in Tashkent",
+      "footer.follow": "Telegramda obuna bo'lish"
+    },
+    ru: {
+      "page.title": "Art Engineering \u2014 \u0421\u0435\u0437\u043e\u043d 2 \u00b7 KIUT",
+      "meta.season": "\u0412\u0435\u0441\u043d\u0430 \u00b7 2026",
+      "hero.brand1": "Art",
+      "hero.brand2": "Engineering",
+      "hero.season": "\u0421\u0435\u0437\u043e\u043d 2",
+      "hero.lede": "\u041e\u0434\u0438\u043d\u043d\u0430\u0434\u0446\u0430\u0442\u044c \u0440\u0430\u0431\u043e\u0442, \u0441\u043e\u0431\u0440\u0430\u043d\u043d\u044b\u0445 \u0438\u0437 \u043e\u0441\u0442\u0430\u0442\u043a\u043e\u0432 \u043f\u043e\u0432\u0441\u0435\u0434\u043d\u0435\u0432\u043d\u043e\u0439 \u0436\u0438\u0437\u043d\u0438 \u2014 \u0431\u0443\u0442\u044b\u043b\u043e\u043a, \u043f\u0440\u043e\u0432\u043e\u0434\u043e\u0432, \u0446\u0435\u043b\u043b\u043e\u0444\u0430\u043d\u0430, \u043f\u043e\u0433\u043e\u0434\u044b. \u0412\u0442\u043e\u0440\u043e\u0435 \u0438\u0437\u0434\u0430\u043d\u0438\u0435 Art Engineering \u0432 KIUT, \u0432\u043e\u0437\u0432\u0440\u0430\u0449\u0430\u044e\u0449\u0435\u0435\u0441\u044f \u0441\u043f\u0443\u0441\u0442\u044f \u0434\u0432\u0430 \u0433\u043e\u0434\u0430 \u043f\u043e\u0441\u043b\u0435 \u043f\u0435\u0440\u0432\u043e\u0439 \u0432\u044b\u0441\u0442\u0430\u0432\u043a\u0438.",
+      "intro.exhibition.label": "\u0412\u044b\u0441\u0442\u0430\u0432\u043a\u0430",
+      "intro.exhibition.brand": "Art Engineering",
+      "intro.exhibition.season": "\u0421\u0435\u0437\u043e\u043d 2",
+      "intro.exhibition.since": " \u00b7 \u0441 2024 \u0433\u043e\u0434\u0430",
+      "intro.works.label": "\u0420\u0430\u0431\u043e\u0442\u044b",
+      "intro.works.value": "\u0421\u043c\u0435\u0448\u0430\u043d\u043d\u0430\u044f \u0442\u0435\u0445\u043d\u0438\u043a\u0430 \u00b7 2026",
+      "intro.location.label": "\u041c\u0435\u0441\u0442\u043e \u043f\u0440\u043e\u0432\u0435\u0434\u0435\u043d\u0438\u044f",
+      "intro.location.street": "\u0443\u043b. \u0428\u043e\u0442\u0430 \u0420\u0443\u0441\u0442\u0430\u0432\u0435\u043b\u0438, 156,",
+      "intro.location.city": "100121 \u0422\u0430\u0448\u043a\u0435\u043d\u0442",
+      "section.catalog": "\u041a\u0430\u0442\u0430\u043b\u043e\u0433",
+      "section.count": "11 \u0440\u0430\u0431\u043e\u0442",
+      "footer.copy": "\u00a9 2026 Kimyo International University in Tashkent",
+      "footer.follow": "\u041f\u043e\u0434\u043f\u0438\u0441\u0430\u0442\u044c\u0441\u044f \u0432 Telegram"
+    }
+  };
+
+  function applyLang(lang) {
+    const dict = translations[lang] || translations.en;
+    document.documentElement.lang = lang;
+    if (dict["page.title"]) document.title = dict["page.title"];
+    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+      const key = el.getAttribute("data-i18n");
+      if (Object.prototype.hasOwnProperty.call(dict, key)) {
+        el.textContent = dict[key];
+      }
+    });
+    document.querySelectorAll(".lang-btn").forEach(function (btn) {
+      btn.classList.toggle("active", btn.dataset.lang === lang);
+    });
+    try { localStorage.setItem("kiut.lang", lang); } catch (e) {}
+  }
+
+  const supported = ["en", "uz", "ru"];
+  let initial = "en";
+  try {
+    const stored = localStorage.getItem("kiut.lang");
+    if (supported.indexOf(stored) !== -1) initial = stored;
+  } catch (e) {}
+
+  applyLang(initial);
+
+  document.querySelectorAll(".lang-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () { applyLang(btn.dataset.lang); });
+  });
+})();
+</script>
+
+</body>
+</html>
