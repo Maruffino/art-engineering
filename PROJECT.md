@@ -1,88 +1,103 @@
 # art_info_site
 
-QR-code-driven information pages for **Art Engineering — Season 2**, the second edition of an ecological / environmental art exhibition hosted by **Kimyo International University in Tashkent (KIUT)**. Season 1 was staged in 2024; Season 2 opens Spring 2026. Each stand has a QR code that, when scanned, opens a web page with the artwork's image, title, story, and metadata.
+QR-code-driven multilingual information pages for **Art Engineering — Season 2**, the second edition of the ecological/engineering art exhibition hosted by **Kimyo International University in Tashkent (KIUT)**. Season 1 was staged in 2024.
 
-- Exhibition: Art Engineering — Season 2
-- First staged: 2024 (Season 1) · Current: Spring 2026 (Season 2)
-- Host: Kimyo International University in Tashkent — https://kiut.uz/en
-- Venue: Shota Rustaveli St., 156, 100121 Tashkent (ул. Шота Руставели, 156, 100121 Ташкент)
+- Exhibition dates: **20–25 April 2026**
+- Host: Kimyo International University in Tashkent (KIUT) — https://kiut.uz/en
+- Venue: Shota Rustaveli St., 156, 100121 Tashkent (Yandex Maps: https://yandex.uz/maps/-/CPCirU0f)
+- Director/curator: Prof. Djamshid Kaniev
+- Main designer: Husan Pulatov (Instagram [@husanpulatov](https://www.instagram.com/husanpulatov))
+- Build team: KIUT Engineering team (Instagram [@muhandis_d](https://www.instagram.com/muhandis_d))
 
-## Goal
+## Live
 
-Visitors at the exhibition scan a QR code at each stand and see a dedicated page with:
-- Photo of the work
-- Title, year, medium, size
-- Artist's note / story / concept behind the piece
-- Related works in the same exhibition
-- Follow / contact CTAs (Telegram, email)
+- **Catalog**: https://maruffino.github.io/art-engineering/
+- **Repo**: https://github.com/Maruffino/art-engineering (public)
+- **14 stand detail pages**: `stand-01.html` through `stand-14.html`
+- **15 QR codes** printed and attached to stands (14 per-stand + 1 catalog-entry QR)
 
-## Exhibition theme
-
-Environmental and ecological commentary — waste, pollution, climate, and nature. Artworks are mostly assemblages from discarded materials (glass bottles, e-waste, cellophane) and immersive installations about pollution and ecosystems.
-
-## Approach chosen
-
-**Static site hosted on GitHub Pages** (free, universal — works from any phone camera, no app required).
-
-Alternatives considered:
-- Telegram bot with deep links (`t.me/bot?start=stand1`) — works but filters out non-Telegram visitors
-- Telegram channel posts — no coding, but Telegram-only
-- Hybrid — web page with "Open in Telegram" button (best reach + follow-up channel)
-
-## Current state
-
-- Demo mockup exists: `index.html` (catalog) + `stand-03.html` (detail page), still using portrait placeholder text — needs to be rewritten for ecological theme
-- Aesthetic direction draft: editorial / gallery-catalog — warm parchment, Instrument Serif + Manrope, terracotta accent. **May be revised** to better suit the ecological/industrial tone of the work
-- 10 real artwork photos in `pictures/`, renamed with descriptive slugs
-
-## Artworks (photo-time order, not yet confirmed as exhibition order)
-
-| # | File | Description |
-|---|---|---|
-| 01 | `01-bottle-turtle.jpg` | Sea turtle sculpture from green glass bottles and wire |
-| 02 | `02-cloud-garden.jpg` | Hydroponic tower with cotton "cloud" on top, grass growing down the sides |
-| 03 | `03-wire-fish.jpg` | Fish sculpture from computer wires, circuit board, and keyboard keys (e-waste) |
-| 04 | `04-plastic-skyline.jpg` | Glass case with hanging plastic strips; city skyline photo inside |
-| 05 | `05-smog-vitrine.jpg` | Illuminated vitrine with miniature city and purple smog clouds |
-| 06 | `06-fetus-reaching-earth.jpg` | Cellophane relief: fetus reaching for wrapped Earth globe |
-| 07 | `07-hall-projection.jpg` | Exhibition-hall view — black pillar sculpture with floor projection of river/nature |
-| 08 | `08-climate-chamber.jpg` | Cylindrical glass terrarium with plants and pressure gauges |
-| 09 | `09-golden-dragonfly.jpg` | Golden dragonfly sculpture with wire-mesh wings |
-| 10 | `10-ruined-city-diorama.jpg` | Diorama of decayed post-Soviet cityscape (Russian signage) |
-| 11 | `11-pipe-tree-pond.jpg` | Industrial pipe "tree" rising out of a koi pond |
-| 12 | `12-climate-accords.jpg` | 5x5 grid of crumpled international climate treaty documents |
-| 13 | `13-renewable-tree.jpg` | White tree with solar-panel leaves and wind-turbine fruit |
-| 14 | `14-zoetrope.jpg` | Large zoetrope drum; rotating reveals tree + people animation |
+⚠ **URLs are frozen** — QR codes are printed. Never rename `stand-NN.html`, `pictures/*`, `qrcodes/*`, or the repo itself. Content inside files is safe to edit.
 
 ## Languages
 
-Language switcher (EN / UZ / RU) live on `index.html`. Visitor's choice persists across pages via `localStorage` key `kiut.lang`.
+Language switcher live in 4 languages: **EN · UZ (Latin) · RU · KO**.
+Switcher persists choice across pages via `localStorage` key `kiut.lang`.
+Copyright line stays in English across all languages ("© 2026 Kimyo International University in Tashkent") — legal/institutional name.
 
-Translations for UI chrome (labels, lede, footer, CTA, address format) are in place but **Uzbek and Russian translations need native-speaker review** before publishing. Artwork titles are currently placeholder English strings — they will need translation once real titles are finalized.
+## Piece titles and status (April 2026)
 
-Not yet translated: `stand-01.html` (artist statement, piece metadata). Same switcher pattern can be extended — requires UZ/RU copy for each piece.
+| # | Title (EN) | Status |
+|---|---|---|
+| 01 | Glass *Current* | placeholder body |
+| 02 | After the *Drought* | placeholder body |
+| 03 | Silicon *Tide* | placeholder body |
+| 04 | Behind the *Veil* | placeholder body |
+| 05 | The *Wounds of the City* | real content ✓ (retitled from "Respirator for a City") |
+| 06 | *Inheritance* | placeholder body |
+| 07 | The Music of *Motion* | real content ✓ (retitled from "The River That Was Here"; interactive RTSP camera + motion-detection music installation) |
+| 08 | A Missing *Climate* | placeholder body |
+| 09 | Last of the *Gilded* | real materials ✓ (dragonfly from recycled plastic, wires, pens, markers) |
+| 10 | One *Choice Apart* | real content ✓ (retitled from "The City Remembers Itself"; two-sided forest/destroyed-nature piece); image still old diorama — user-approved |
+| 11 | Rust and *Lily* | body = ship-in-desert philosophical framing; materials = salvaged pipes + coral-reef imitations + live fish; title kept per user |
+| 12 | A Wall of *Accords* | placeholder body |
+| 13 | The Renewable *Tree* | real content ✓ (engineering+art tree with solar leaves + wind-turbine fruit) |
+| 14 | The Living *Wheel* | placeholder body (zoetrope) |
 
-## Open decisions
+"Placeholder body" = philosophical prose written by me, not by the artist/team. All UZ/RU/KO translations are placeholder and need native-speaker review before reprint.
 
-1. **Exhibition order**: is the photo-time order above the actual stand order, or does it need reordering?
-2. **Artist / exhibition metadata**: artist name(s), exhibition title, venue, dates, any institutional affiliation
-3. **Per-artwork content**: title, year, medium, size, artist statement for each of the 10 pieces
-4. **Aesthetic direction**: current mockup is warm/editorial. For ecological work we might prefer: dark/industrial, raw/recycled aesthetic (paper-bag textures, stamped-ink type), or clean museum minimal
-5. **Content sections per stand**: current is title / photo / story / metadata / "also in series" / follow CTA. Add audio narration? Video? Credits for sourced materials?
-6. **Language**: English only, or bilingual (e.g. local language + English)?
-7. **QR generation**: batch tool once final URLs exist
+## Structure
 
-## Deployment plan
+```
+art_info_site/
+├── index.html              # catalog + language switcher + 14 piece tiles
+├── stand-01.html .. stand-14.html   # detail pages (frozen URLs)
+├── PROJECT.md              # this file
+├── pictures/
+│   ├── 01-bottle-turtle.jpg .. 14-zoetrope.jpg   # piece images
+│   └── 13-renewable-tree.png  # one piece is .png not .jpg
+├── qrcodes/
+│   ├── index.png           # catalog QR
+│   └── stand-01.png .. stand-14.png   # per-piece QRs
+└── assets/
+    ├── logo-header.svg     # KIUT logo (original, white+blue, for dark bg)
+    ├── logo-header-dark.svg  # same but recoloured for light bg
+    ├── logo-blue.svg       # blue-only variant
+    └── logo-mono.svg       # ink-only variant
+```
 
-1. Repo on GitHub (name TBD)
-2. HTML + compressed images (WebP, ~300–500 KB each) committed
-3. Settings → Pages → enable from main branch
-4. Public URL: `https://<username>.github.io/<repo>/`
-5. Generate one QR per stand pointing to `.../stand-01/` (etc.)
+## Translation key conventions
 
-## Files
+**Shared chrome** (same across all stand pages):
+- `chrome.back`, `chrome.kicker`, `chrome.meta.year|medium|size`, `chrome.also`, `chrome.stayintouch`, `chrome.follow`, `chrome.instagram`, `chrome.address`, `chrome.season`
 
-- `index.html` — exhibition catalog overview (placeholder portrait content, to be rewritten)
-- `stand-03.html` — sample individual stand page (placeholder, to be templated for 10 artworks)
-- `pictures/` — 10 renamed artwork photos
-- `PROJECT.md` — this file
+**Per-piece** (unique per stand):
+- `piece.title.prefix`, `piece.title.accent`, `piece.medium`, `piece.size`, `piece.caption`, `piece.p1`, `piece.p2`
+- `piece.dl.dt1..5`, `piece.dl.dd1..5` (5 rows in the materials/details block)
+
+**Catalog-only** (`index.html`):
+- `meta.season` (masthead right), `hero.brand1|brand2|season`, `hero.lede.before|team|after`
+- `intro.exhibition.label|brand|season|since`, `intro.artist.label`, `intro.location.label|street|city`
+- `section.catalog`, `section.count`, `footer.copy`, `footer.follow`, `footer.designer`
+
+## Update workflow
+
+When the user provides new source text for a piece (usually in Uzbek):
+
+1. Propose rephrased drafts in all 4 languages, philosophically rather than literally
+2. Wait for approval (`go` / `p1` / `both`)
+3. On approval, **sweep everything related** to the piece: p1, p2, caption, medium, `<dl>` rows, image `alt`, `<title>` tag. Never leave stale halves.
+4. If title changes, update: page `<title>`, piece-title H1 (prefix + em accent), catalog tile in `index.html`, all 4 language dicts
+5. Commit with cohesive message
+6. Push, wait for Pages build to complete, verify live with cache-busted curl
+
+## Known cosmetic issues
+
+- Stand 10 image `pictures/10-ruined-city-diorama.jpg` doesn't match the current "One Choice Apart" (forest/destroyed) body — user approved keeping as-is
+- Stand 11 image `pictures/11-pipe-tree-pond.jpg` doesn't match the ship-in-desert body — no new photo available
+- Stands 01/02/03/04/06/08/12/14 bodies are placeholder philosophical drafts, not real artist statements
+
+## Analytics
+
+Available via GitHub Pages built-in traffic insights:
+https://github.com/Maruffino/art-engineering/graphs/traffic
+(last 14 days, visible to repo owner only)
